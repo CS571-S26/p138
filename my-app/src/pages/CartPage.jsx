@@ -1,7 +1,10 @@
-import { Container, Row, Col, Button, Table } from 'react-bootstrap'
+import { useState } from 'react'
+import { Container, Row, Col, Button, Table, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 export default function CartPage({ cart, removeFromCart, updateQty }) {
+  const [showCheckout, setShowCheckout] = useState(false)
+
   const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0)
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0)
 
@@ -80,8 +83,9 @@ export default function CartPage({ cart, removeFromCart, updateQty }) {
                 <span>Total</span>
                 <span>${total.toFixed(2)}</span>
               </div>
-              {/* TODO: hook this up to the checkout form */}
-              <Button className="btn-red w-100 mt-3">Proceed to Checkout</Button>
+              <Button className="btn-red w-100 mt-3" onClick={() => setShowCheckout(true)}>
+                Proceed to Checkout
+              </Button>
               <Link to="/shop" className="d-block text-center mt-2 text-muted" style={{ fontSize: '0.9rem' }}>
                 ← Continue Shopping
               </Link>
@@ -89,6 +93,35 @@ export default function CartPage({ cart, removeFromCart, updateQty }) {
           </Col>
         </Row>
       </Container>
+
+      {/* Checkout Modal */}
+      <Modal show={showCheckout} onHide={() => setShowCheckout(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title style={{ fontWeight: 700 }}>Complete Your Order</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p className="text-muted mb-3">
+            Send <strong>${total.toFixed(2)}</strong> via Zelle or Venmo and include your name in the note.
+          </p>
+
+          {/* Zelle */}
+          <div className="cart-summary mb-3">
+            <h4>💜 Zelle</h4>
+            <p className="mb-0">Send to: <strong>asiangifts@email.com</strong></p>{/* TODO: replace */}
+            <p className="text-muted" style={{ fontSize: '0.82rem' }}>Note: your name + "Asian Gifts order"</p>
+          </div>
+
+          {/* Venmo */}
+          <div className="cart-summary">
+            <h4>💙 Venmo</h4>
+            <p className="mb-0">Send to: <strong>@AsianGifts</strong></p>{/* TODO: replace */}
+            <p className="text-muted" style={{ fontSize: '0.82rem' }}>Note: your name + "Asian Gifts order"</p>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="outline-secondary" onClick={() => setShowCheckout(false)}>Go Back</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

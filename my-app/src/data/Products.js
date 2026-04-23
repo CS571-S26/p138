@@ -9,7 +9,11 @@ export const products = [
     rating: 4.8,
     reviews: 124,
     badge: 'Popular',
-    image: 'https://placehold.co/300x220/e63946/fff?text=Red+Envelopes',
+    images: [
+      'https://placehold.co/300x220/e63946/fff?text=Red+Envelopes',
+      'https://placehold.co/300x220/c1121f/fff?text=Inside+View',
+      'https://placehold.co/300x220/a00010/fff?text=Set+of+10',
+    ],
   },
   {
     id: 2,
@@ -20,7 +24,11 @@ export const products = [
     rating: 4.6,
     reviews: 88,
     badge: null,
-    image: 'https://placehold.co/300x220/2d6a4f/fff?text=Panda+Tea+Set',
+    images: [
+      'https://placehold.co/300x220/2d6a4f/fff?text=Panda+Tea+Set',
+      'https://placehold.co/300x220/1b4332/fff?text=Teapot+Close-up',
+      'https://placehold.co/300x220/40916c/fff?text=4+Cups',
+    ],
   },
   {
     id: 3,
@@ -31,7 +39,11 @@ export const products = [
     rating: 4.9,
     reviews: 210,
     badge: 'Popular',
-    image: 'https://placehold.co/300x220/f4a261/fff?text=Washi+Tape',
+    images: [
+      'https://placehold.co/300x220/f4a261/fff?text=Washi+Tape',
+      'https://placehold.co/300x220/e76f51/fff?text=Floral+Pattern',
+      'https://placehold.co/300x220/e9c46a/fff?text=All+10+Rolls',
+    ],
   },
   {
     id: 4,
@@ -42,7 +54,11 @@ export const products = [
     rating: 4.4,
     reviews: 67,
     badge: 'Sale',
-    image: 'https://placehold.co/300x220/9b2335/fff?text=Silk+Purse',
+    images: [
+      'https://placehold.co/300x220/9b2335/fff?text=Silk+Purse',
+      'https://placehold.co/300x220/7b1828/fff?text=Embroidery+Detail',
+      'https://placehold.co/300x220/c9184a/fff?text=Color+Options',
+    ],
   },
   {
     id: 5,
@@ -53,7 +69,11 @@ export const products = [
     rating: 4.7,
     reviews: 155,
     badge: null,
-    image: 'https://placehold.co/300x220/52b788/fff?text=Matcha+Snacks',
+    images: [
+      'https://placehold.co/300x220/52b788/fff?text=Matcha+Snacks',
+      'https://placehold.co/300x220/2d6a4f/fff?text=Kit-Kats',
+      'https://placehold.co/300x220/40916c/fff?text=Mochi+%26+Wafers',
+    ],
   },
   {
     id: 6,
@@ -64,7 +84,11 @@ export const products = [
     rating: 4.5,
     reviews: 92,
     badge: null,
-    image: 'https://placehold.co/300x220/606c38/fff?text=Bamboo+Stand',
+    images: [
+      'https://placehold.co/300x220/606c38/fff?text=Bamboo+Stand',
+      'https://placehold.co/300x220/3f4d20/fff?text=Side+View',
+      'https://placehold.co/300x220/7c8a4a/fff?text=With+Phone',
+    ],
   },
   {
     id: 7,
@@ -75,7 +99,11 @@ export const products = [
     rating: 4.3,
     reviews: 44,
     badge: 'Sale',
-    image: 'https://placehold.co/300x220/023e8a/fff?text=Koi+Art',
+    images: [
+      'https://placehold.co/300x220/023e8a/fff?text=Koi+Art',
+      'https://placehold.co/300x220/03045e/fff?text=Detail+View',
+      'https://placehold.co/300x220/0077b6/fff?text=Framed+Example',
+    ],
   },
   {
     id: 8,
@@ -86,7 +114,11 @@ export const products = [
     rating: 4.9,
     reviews: 305,
     badge: 'Popular',
-    image: 'https://placehold.co/300x220/f77f00/fff?text=Sticker+Pack',
+    images: [
+      'https://placehold.co/300x220/f77f00/fff?text=Sticker+Pack',
+      'https://placehold.co/300x220/d62828/fff?text=Food+Stickers',
+      'https://placehold.co/300x220/fcbf49/fff?text=Kawaii+Animals',
+    ],
   },
 ]
 

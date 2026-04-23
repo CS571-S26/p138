@@ -38,7 +38,7 @@ function App() {
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0)
 
   return (
-    <Router>
+    <Router basename="/p138/">
       <NavBar cartCount={totalItems} />
       <main>
         <Routes>
