@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import { Container, Row, Col, Button, Table, Modal } from 'react-bootstrap'
+import { Container, Row, Col, Button, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import CartItem from '../components/CartItem'
+import CheckoutModal from '../components/CheckoutModal'
 
 export default function CartPage({ cart, removeFromCart, updateQty }) {
   const [showCheckout, setShowCheckout] = useState(false)
@@ -12,8 +14,8 @@ export default function CartPage({ cart, removeFromCart, updateQty }) {
   if (cart.length === 0) {
     return (
       <Container className="text-center py-5">
-        <div style={{ fontSize: '4rem' }}>🛒</div>
-        <h2>Your cart is empty</h2>
+        <div style={{ fontSize: '4rem' }} aria-hidden="true">🛒</div>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 700 }}>Your cart is empty</h1>
         <p className="text-muted">Add some items from the shop to get started!</p>
         <Button as={Link} to="/shop" className="btn-red">Start Shopping</Button>
       </Container>
@@ -31,37 +33,21 @@ export default function CartPage({ cart, removeFromCart, updateQty }) {
             <Table responsive bordered>
               <thead className="table-light">
                 <tr>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Qty</th>
-                  <th>Subtotal</th>
-                  <th></th>
+                  <th scope="col">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Subtotal</th>
+                  <th scope="col"><span className="visually-hidden">Remove</span></th>
                 </tr>
               </thead>
               <tbody>
                 {cart.map(item => (
-                  <tr key={item.id}>
-                    <td>
-                      <div style={{ fontSize: '0.72rem', color: '#c1121f', fontWeight: 600, textTransform: 'uppercase' }}>
-                        {item.category}
-                      </div>
-                      {item.name}
-                    </td>
-                    <td>${item.price.toFixed(2)}</td>
-                    <td>
-                      <div className="qty-control">
-                        <button onClick={() => updateQty(item.id, item.qty - 1)}>−</button>
-                        <span>{item.qty}</span>
-                        <button onClick={() => updateQty(item.id, item.qty + 1)}>+</button>
-                      </div>
-                    </td>
-                    <td>${(item.price * item.qty).toFixed(2)}</td>
-                    <td>
-                      <button className="remove-btn" onClick={() => removeFromCart(item.id)}>
-                        🗑
-                      </button>
-                    </td>
-                  </tr>
+                  <CartItem
+                    key={item.id}
+                    item={item}
+                    updateQty={updateQty}
+                    removeFromCart={removeFromCart}
+                  />
                 ))}
               </tbody>
             </Table>
@@ -70,7 +56,9 @@ export default function CartPage({ cart, removeFromCart, updateQty }) {
           {/* order summary */}
           <Col lg={4}>
             <div className="cart-summary">
-              <h4>Order Summary</h4>
+              <h2 style={{ fontSize: '1.1rem', fontWeight: 700, paddingBottom: 14, borderBottom: '1px solid #eee', marginBottom: 16 }}>
+                Order Summary
+              </h2>
               <div className="summary-row">
                 <span>Items ({totalItems})</span>
                 <span>${total.toFixed(2)}</span>
@@ -94,34 +82,11 @@ export default function CartPage({ cart, removeFromCart, updateQty }) {
         </Row>
       </Container>
 
-      {/* Checkout Modal */}
-      <Modal show={showCheckout} onHide={() => setShowCheckout(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title style={{ fontWeight: 700 }}>Complete Your Order</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p className="text-muted mb-3">
-            Send <strong>${total.toFixed(2)}</strong> via Zelle or Venmo and include your name in the note.
-          </p>
-
-          {/* Zelle */}
-          <div className="cart-summary mb-3">
-            <h4>💜 Zelle</h4>
-            <p className="mb-0">Send to: <strong>asiangifts@email.com</strong></p>{/* TODO: replace */}
-            <p className="text-muted" style={{ fontSize: '0.82rem' }}>Note: your name + "Asian Gifts order"</p>
-          </div>
-
-          {/* Venmo */}
-          <div className="cart-summary">
-            <h4>💙 Venmo</h4>
-            <p className="mb-0">Send to: <strong>@AsianGifts</strong></p>{/* TODO: replace */}
-            <p className="text-muted" style={{ fontSize: '0.82rem' }}>Note: your name + "Asian Gifts order"</p>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="outline-secondary" onClick={() => setShowCheckout(false)}>Go Back</Button>
-        </Modal.Footer>
-      </Modal>
+      <CheckoutModal
+        show={showCheckout}
+        onHide={() => setShowCheckout(false)}
+        total={total}
+      />
     </div>
   )
 }
